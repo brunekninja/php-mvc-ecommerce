@@ -24,7 +24,7 @@ gulp.task('styles', () => {
     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
     .pipe($.sourcemaps.write())
     .pipe($.if(dev==false, $.cssnano()))
-    .pipe($.if(dev, gulp.dest('.tmp/styles'), gulp.dest('dist/styles')))
+    .pipe($.if(dev, gulp.dest('tmp/styles'), gulp.dest('dist/styles')))
     .pipe($.if(dev, reload({stream: true})));
 });
 
@@ -38,14 +38,13 @@ gulp.task('scripts', () => {
     }))
     .pipe($.babel())
     .pipe($.sourcemaps.write('.'))
-    //.pipe($.if(dev, $.uglify()))
-    .pipe($.if(dev, gulp.dest('.tmp/scripts'), gulp.dest('dist/scripts')))
+    .pipe($.if(dev, gulp.dest('tmp/scripts'), gulp.dest('dist/scripts')))
     .pipe($.if(dev, reload({stream: true})));
 });
 
 gulp.task('scripts:vendor', () => {
   return gulp.src('public/scripts/vendor/**/*')
-    .pipe($.if(dev, gulp.dest('.tmp/scripts/vendor'), gulp.dest('dist/scripts/vendor')));
+    .pipe($.if(dev, gulp.dest('tmp/scripts/vendor'), gulp.dest('dist/scripts/vendor')));
 });
 
 function lint(files, options) {
@@ -64,13 +63,13 @@ gulp.task('lint', () => {
 gulp.task('images', () => {
   return gulp.src('public/images/**/*')
     .pipe($.cache($.imagemin()))
-    .pipe($.if(dev, gulp.dest('.tmp/images'), gulp.dest('dist/images')));
+    .pipe($.if(dev, gulp.dest('tmp/images'), gulp.dest('dist/images')));
 });
 
 gulp.task('fonts', () => {
   return gulp.src(require('main-bower-files', 'public/')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
     .concat('public/fonts/**/*'))
-    .pipe($.if(dev, gulp.dest('.tmp/fonts'), gulp.dest('dist/fonts')));
+    .pipe($.if(dev, gulp.dest('tmp/fonts'), gulp.dest('dist/fonts')));
 });
 
 gulp.task('extras', () => {
@@ -82,8 +81,8 @@ gulp.task('extras', () => {
   }).pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp']));
-gulp.task('clean:all', del.bind(null, ['.tmp', 'dist']));
+gulp.task('clean', del.bind(null, ['tmp']));
+gulp.task('clean:all', del.bind(null, ['tmp', 'dist']));
 
 gulp.task('serve', () => {
   proxy = '127.0.0.1:8011';
@@ -98,7 +97,8 @@ gulp.task('serve', () => {
 
     gulp.watch([
       'public/images/**/*',
-      '.tmp/fonts/**/*',
+      'app/**/*.php',
+      'index.php'
     ]).on('change', reload);
 
     gulp.watch('public/styles/**/*.scss', ['styles']);
@@ -134,7 +134,7 @@ gulp.task('php', function() {
     var phpPath = 'php';
 
     php.server({
-      base: 'public',
+      base: '.',
       port: 8011,
       keepalive: true,
       stdio: 'ignore',
