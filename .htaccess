@@ -1,0 +1,3 @@
+# Routes to public if is not set in vhosts file...
+RewriteEngine on
+RewriteRule ^(.*) public/$1 [L]

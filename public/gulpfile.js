@@ -13,7 +13,7 @@ const reload = browserSync.reload;
 var dev = true;
 
 gulp.task('styles', () => {
-  return gulp.src('public/styles/*.scss')
+  return gulp.src('assets/styles/*.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass.sync({
@@ -29,7 +29,7 @@ gulp.task('styles', () => {
 });
 
 gulp.task('scripts', () => {
-  return gulp.src('public/scripts/main.js')
+  return gulp.src('assets/scripts/main.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe(browserify({
@@ -43,7 +43,7 @@ gulp.task('scripts', () => {
 });
 
 gulp.task('scripts:vendor', () => {
-  return gulp.src('public/scripts/vendor/**/*')
+  return gulp.src('assets/scripts/vendor/**/*')
     .pipe($.if(dev, gulp.dest('tmp/scripts/vendor'), gulp.dest('dist/scripts/vendor')));
 });
 
@@ -56,55 +56,44 @@ function lint(files, options) {
 }
 
 gulp.task('lint', () => {
-  return lint('public/scripts/**/*.js')
-    .pipe(gulp.dest('public/scripts'));
+  return lint('assets/scripts/**/*.js')
+    .pipe(gulp.dest('scripts'));
 });
 
 gulp.task('images', () => {
-  return gulp.src('public/images/**/*')
+  return gulp.src('assets/images/**/*')
     .pipe($.cache($.imagemin()))
     .pipe($.if(dev, gulp.dest('tmp/images'), gulp.dest('dist/images')));
 });
 
 gulp.task('fonts', () => {
-  return gulp.src(require('main-bower-files', 'public/')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
-    .concat('public/fonts/**/*'))
+  return gulp.src(require('main-bower-files', '/assets')('**/*.{eot,svg,ttf,woff,woff2}', function (err) {})
+    .concat('assets/fonts/**/*'))
     .pipe($.if(dev, gulp.dest('tmp/fonts'), gulp.dest('dist/fonts')));
-});
-
-gulp.task('extras', () => {
-  return gulp.src([
-    'public/*',
-    '!public/*.html'
-  ], {
-    dot: true
-  }).pipe(gulp.dest('dist'));
 });
 
 gulp.task('clean', del.bind(null, ['tmp']));
 gulp.task('clean:all', del.bind(null, ['tmp', 'dist']));
 
 gulp.task('serve', () => {
-  proxy = '127.0.0.1:8011';
-
   runSequence(['clean'], ['styles', 'scripts', 'scripts:vendor', 'fonts', 'images', 'php'], () => {
     browserSync.init({
       notify: false,
       port: 9000,
       open: true,
-      proxy: proxy
+      proxy: 'shopphie.dev'
     });
 
     gulp.watch([
-      'public/images/**/*',
-      'app/**/*.php',
-      'index.php'
+      'assets/images/**/*',
+      '../app/**/*.php',
+      '**/*.php'
     ]).on('change', reload);
 
-    gulp.watch('public/styles/**/*.scss', ['styles']);
-    gulp.watch('public/scripts/**/*.js', ['scripts']);
-    gulp.watch('public/fonts/**/*', ['fonts']);
-    gulp.watch('public/images/**/*', ['images']);
+    gulp.watch('assets/styles/**/*.scss', ['styles']);
+    gulp.watch('assets/scripts/**/*.js', ['scripts']);
+    gulp.watch('assets/fonts/**/*', ['fonts']);
+    gulp.watch('assets/images/**/*', ['images']);
   });
 });
 
@@ -135,7 +124,7 @@ gulp.task('php', function() {
 
     php.server({
       base: '.',
-      port: 8011,
+      port: 8012,
       keepalive: true,
       stdio: 'ignore',
       bin: phpPath
