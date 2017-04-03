@@ -15,12 +15,18 @@
     define ( "RESOURCES_PATH", SITE_URL . "/dist" ); // path where resources are located
   }
 
+
   /**
-   * Error reporting
+   * if development env, use error reporting
    */
-  ini_set( 'display_errors', 1 );
-  ini_set( 'display_startup_errors', 1 );
-  error_reporting( E_ALL );
+  if ($_SERVER["SERVER_ADDR"] == '127.0.0.1') {
+    /**
+     * Error reporting
+     */
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+  }
 
   /**
    * App

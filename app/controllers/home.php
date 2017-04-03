@@ -8,9 +8,16 @@
 
 class Home extends Controller{
   public function index($name = ''){
-    $user = $this->model('model');
-    $user->name = $name;
+    $model = $this->model('model');
+    $model->name = $name;
 
-    $this->view('home/index', ['model' => $user->name]);
+    //include header
+    $this->view('_templates/header');
+
+    // model router
+    $this->view('home/index', ['model' => $model->name]);
+
+    //include footer
+    $this->view('_templates/footer');
   }
 }
