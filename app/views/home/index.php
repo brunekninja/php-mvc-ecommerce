@@ -7,18 +7,6 @@
     </div>
   </div>
 </header>
-<?php
-
-//testing env.. 
-
-var_dump($products_amounts_test);
-
-foreach ($products_amounts_test as $pr)
-{
-  echo $pr;
-}
-
-?>
 <!-- Services Section -->
 <section id="services">
   <div class="container">

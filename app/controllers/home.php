@@ -15,8 +15,7 @@ class Home extends Controller
 
     $dataArr = [
       'model' => $model->name,
-      'products_amount' => $model->getProductsAmount(),
-      'products_amounts_test' => ['test1','test2']
+      'products_amount' => $model->getProductsAmount()
     ];
 
     //include header
