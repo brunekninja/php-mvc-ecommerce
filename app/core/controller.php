@@ -1,12 +1,27 @@
 <?php
 
-class Controller {
+class Controller
+{
+  public $db = null;
+
+  function __construct()
+  {
+    $this->openDBConnection();
+  }
+
+  private function openDBConnection()
+  {
+    $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
+    $this->db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET, DB_USER, DB_PASS, $options);
+  }
+
   public function model($model) {
     require_once '../app/models/' . $model . '.php';
-    return new $model();
+    return new $model($this->db);
   }
 
   public function view($view, $data = []) {
+    extract($data, EXTR_PREFIX_SAME, 'dd');
     require_once '../app/views/' . $view . '.php';
   }
 }

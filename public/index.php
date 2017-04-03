@@ -15,7 +15,6 @@
     define ( "RESOURCES_PATH", SITE_URL . "/dist" ); // path where resources are located
   }
 
-
   /**
    * if development env, use error reporting
    */

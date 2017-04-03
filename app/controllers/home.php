@@ -6,16 +6,24 @@
  * Time: 18:52
  */
 
-class Home extends Controller{
-  public function index($name = ''){
+class Home extends Controller
+{
+  public function index($name = '')
+  {
     $model = $this->model('model');
     $model->name = $name;
+
+    $dataArr = [
+      'model' => $model->name,
+      'products_amount' => $model->getProductsAmount(),
+      'products_amounts_test' => ['test1','test2']
+    ];
 
     //include header
     $this->view('_templates/header');
 
-    // model router
-    $this->view('home/index', ['model' => $model->name]);
+    // view router
+    $this->view('home/index', $dataArr);
 
     //include footer
     $this->view('_templates/footer');
