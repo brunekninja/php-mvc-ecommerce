@@ -16,12 +16,20 @@ class Model {
     }
   }
 
-  public function getProductsAmount()
+  public function getProducts()
   {
-    $sql = "SELECT COUNT(id) AS products_amount FROM products";
+    $sql = "SELECT 
+              productName AS name, 
+              productPrice AS price, 
+              productDescription AS description,
+              imageRef AS image,
+              catName AS category
+            FROM products
+            INNER JOIN categories ON products.categoryID = categories.id";
+
     $query = $this->db->prepare($sql);
     $query->execute();
 
-    return $query->fetch()->products_amount;
+    return $query->fetchAll();
   }
 }
