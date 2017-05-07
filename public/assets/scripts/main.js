@@ -42,6 +42,46 @@ require('jquery.easing');
       }
     });
 
+
+    // add product to cart from main landing page
+    $('.portfolio-link').on('click', function (e) {
+      e.preventDefault();
+
+      var _this = $(this),
+          prodID = _this.data('product-id');
+
+      cart_ajax_action('add', prodID);
+
+    });
+
+    function cart_ajax_action(action, prodID) {
+      var query = '';
+
+      $.ajax({
+        url: url + '/ajaxController/addToCart',
+        type: 'post',
+        data: query,
+        dataType: 'json',
+        success: function (data, status, xhr) {
+          console.log(data);
+        },
+        error: function (xhr, status, error) {
+          console.log(error);
+        }
+      });
+
+      // $.ajax(url + "/ajaxController/addToCart")
+      //   .done(function(result) {
+      //     console.log(prodID);
+      //     console.log(result);
+      //   })
+      //   .fail(function() {
+      //   })
+      //   .always(function() {
+      //   });
+
+    }
+
   });
 
 })(jQuery); // End of use strict

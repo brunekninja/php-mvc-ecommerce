@@ -255,6 +255,8 @@ section {
             position: relative;
             max-width: 400px;
             margin: 0 auto;
+            padding: 0;
+            border: none;
             .portfolio-hover {
                 background: fade-out($theme-primary, .9);
                 position: absolute;

@@ -19,6 +19,7 @@ class Model {
   public function getProducts()
   {
     $sql = "SELECT 
+              products.id AS id,
               productName AS name, 
               productPrice AS price, 
               productDescription AS description,

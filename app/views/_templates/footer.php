@@ -26,6 +26,11 @@
   </div>
 </footer>
 
+<!-- Set url for js use -->
+<script>
+  var url = "<?php echo URL; ?>";
+</script>
+
 <!-- Theme JavaScript -->
 <script src="<?php echo RESOURCES_PATH ?>/scripts/main.js"></script>
 
