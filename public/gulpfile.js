@@ -5,7 +5,11 @@ const browserSync = require('browser-sync').create();
 const del = require('del');
 const runSequence = require('run-sequence');
 const php = require('gulp-connect-php');
-const browserify = require('gulp-browserify');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const uglify  = require('gulp-uglify');
+const buffer  = require('vinyl-buffer');
+const source  = require('vinyl-source-stream');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -28,19 +32,27 @@ gulp.task('styles', () => {
     .pipe($.if(dev, reload({stream: true})));
 });
 
+
 gulp.task('scripts', () => {
-  return gulp.src('assets/scripts/main.js')
+  var bundler = browserify({
+    entries: 'assets/scripts/main.js',
+    debug: true
+  });
+
+  bundler.transform(babelify);
+
+  bundler.bundle()
+    .pipe(source('main.js'))
     .pipe($.plumber())
-    .pipe($.sourcemaps.init())
-    .pipe(browserify({
-      insertGlobals : true,
-      debug : true
-    }))
-    .pipe($.babel())
+    .pipe(buffer())
+    .pipe($.sourcemaps.init({ loadMaps: true }))
     .pipe($.sourcemaps.write('.'))
+    // .pipe(uglify())
     .pipe($.if(dev, gulp.dest('tmp/scripts'), gulp.dest('dist/scripts')))
     .pipe($.if(dev, reload({stream: true})));
 });
+
+
 
 gulp.task('scripts:vendor', () => {
   return gulp.src('assets/scripts/vendor/**/*')

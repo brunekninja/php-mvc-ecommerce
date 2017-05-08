@@ -11,12 +11,19 @@ class ajaxController extends Controller
   public function addToCart()
   {
 
-    if(isset($_POST[''])){
+    if(isset($_POST['productID'])){
 
+      $action = $_POST['action'];
+
+      switch ($action)
+      {
+        case 'add':
+          echo $_POST['productID'];
+          break;
+        case 'remove':
+          echo $_POST['productID'];
+          break;
+      }
     }
-
-    $some = 'test';
-
-    echo json_encode($some);
   }
 }
