@@ -17,10 +17,10 @@ let add_to_cart = function () {
     };
 
     $.ajax({
-      url: url + '/ajaxController/addToCart',
+      url: url + '/cart/addToCart',
       type: 'post',
       data: jsonData,
-      dataType: 'json',
+      // dataType: 'json',
       success: function (data, status, xhr) {
         console.log(data);
       },

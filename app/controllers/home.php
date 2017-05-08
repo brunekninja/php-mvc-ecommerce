@@ -18,6 +18,10 @@ class Home extends Controller
       'products' => $model->getProducts()
     ];
 
+    $session = new Session();
+
+    $session->start();
+
     //include header
     $this->view('_templates/header');
 

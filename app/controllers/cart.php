@@ -7,7 +7,23 @@
  */
 
 class Cart extends Controller {
-  public function index() {
 
+  public function addToCart()
+  {
+    if(isset($_POST['productID'])){
+
+      $action = $_POST['action'];
+      $model = new Model('model');
+
+      switch ($action)
+      {
+        case 'add':
+          $model->sessionCtrl();
+          break;
+        case 'remove':
+          echo $_POST['productID'];
+          break;
+      }
+    }
   }
 }

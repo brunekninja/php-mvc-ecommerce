@@ -74,7 +74,9 @@
           </div>
         </div>
 
-      <?php endforeach; ?>
+      <?php endforeach;
+      if (isset($_SESSION)){
+      print_r($_SESSION);} ?>
     </div>
 </section>
 
