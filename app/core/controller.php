@@ -2,6 +2,10 @@
 
 class Controller
 {
+  protected $cart;
+  protected $home;
+  protected $session;
+
   /**
    * @var null Database Connection
    */
@@ -14,6 +18,7 @@ class Controller
 
   function __construct()
   {
+    $this->session = new Session();
     $this->openDBConnection();
     $this->model('model');
   }

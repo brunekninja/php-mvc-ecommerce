@@ -13,15 +13,15 @@ class Cart extends Controller {
     if(isset($_POST['productID'])){
 
       $action = $_POST['action'];
-      $model = new Model('model');
+      $productID = $_POST['productID'];
 
       switch ($action)
       {
         case 'add':
-          $model->sessionCtrl();
+          $this->session->add($productID);
           break;
         case 'remove':
-          echo $_POST['productID'];
+          $this->session->remove($productID);
           break;
       }
     }

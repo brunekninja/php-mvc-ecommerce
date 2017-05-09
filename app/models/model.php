@@ -51,9 +51,4 @@ class Model {
     return $query->fetchAll();
   }
 
-  public function sessionCtrl()
-  {
-    $_SESSION['cart_products'] = 33;
-  }
-
 }
