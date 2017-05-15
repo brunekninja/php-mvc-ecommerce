@@ -45,6 +45,9 @@
         <li>
           <a class="page-scroll" href="#contact">Contact</a>
         </li>
+        <li>
+          <a href="/cart">CART <span class="items-num"><?php echo (isset($_SESSION['cart_products'])) ? sizeof($_SESSION['cart_products']) : '0'; ?></span></a>
+        </li>
       </ul>
     </div>
     <!-- /.navbar-collapse -->

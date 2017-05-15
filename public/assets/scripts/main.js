@@ -11,7 +11,7 @@ require('jquery.easing');
 
 
 import {common} from './common';
-import {add_to_cart} from './add-to-cart';
+import {cart} from './cart';
 
 
 /**
@@ -24,7 +24,7 @@ import {add_to_cart} from './add-to-cart';
 
     common();
 
-    add_to_cart();
+    cart();
 
   });
 

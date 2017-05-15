@@ -709,6 +709,19 @@ ul.social-buttons {
     }
 }
 
+.button--big{
+  width: 200px;
+  border: none;
+  margin: 30px 0;
+}
+
+.button--item{
+  width: 100%;
+  display: block;
+  border: none;
+
+}
+
 // Highlight Color Customization
 
 ::-moz-selection {

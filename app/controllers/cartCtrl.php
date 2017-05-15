@@ -6,14 +6,17 @@
  * Time: 21:42
  */
 
-class Cart extends Controller {
+class CartCtrl extends Controller {
 
   public function addToCart()
   {
-    if(isset($_POST['productID'])){
+    if(isset($_POST['action'])){
 
       $action = $_POST['action'];
-      $productID = $_POST['productID'];
+      $productID = null;
+
+      if (isset($_POST['productID']))
+        $productID = $_POST['productID'];
 
       switch ($action)
       {
@@ -22,6 +25,9 @@ class Cart extends Controller {
           break;
         case 'remove':
           $this->session->remove($productID);
+          break;
+        case 'clean':
+          $this->session->clean();
           break;
       }
     }

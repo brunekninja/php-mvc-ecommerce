@@ -8,8 +8,10 @@
 
 class Home extends Controller
 {
-  public function index($name = '')
+  public function index($name = '', $method = '')
   {
+    $this->session->start();
+
     $model = $this->model('model');
     $model->name = $name;
 
@@ -18,7 +20,6 @@ class Home extends Controller
       'products' => $model->getProducts()
     ];
 
-    $this->session->start();
 
     //include header
     $this->view('_templates/header');

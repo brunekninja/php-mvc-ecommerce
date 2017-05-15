@@ -58,7 +58,7 @@
       <?php foreach ($products as $product): ?>
 
         <div class="col-md-4 col-sm-6 portfolio-item">
-          <button class="portfolio-link add-cart" data-toggle="modal" data-product-id="<?php echo $product->id; ?>">
+          <button class="portfolio-link cart-action" data-toggle="modal" data-action="add" data-product-id="<?php echo $product->id; ?>">
             <div class="portfolio-hover">
               <div class="portfolio-hover-content">
                 <i class="fa fa-plus fa-3x"></i>
@@ -74,9 +74,7 @@
           </div>
         </div>
 
-      <?php endforeach;
-      if (isset($_SESSION)){
-      print_r($_SESSION);} ?>
+      <?php endforeach; ?>
     </div>
 </section>
 
