@@ -36,14 +36,18 @@ class Model {
 
   public function getProductByID($prodID)
   {
+    $ids = join(',', $prodID);
+
     $sql = "SELECT 
               products.id AS id,
               productName AS name, 
               productPrice AS price, 
               productDescription AS description,
-              imageRef AS image
+              imageRef AS image,
+              catName AS category
             FROM products
-            WHERE id = $prodID";
+            INNER JOIN categories ON products.categoryID = categories.id
+            WHERE products.id IN ($ids)";
 
     $query = $this->db->prepare($sql);
     $query->execute();

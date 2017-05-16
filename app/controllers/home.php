@@ -20,7 +20,6 @@ class Home extends Controller
       'products' => $model->getProducts()
     ];
 
-
     //include header
     $this->view('_templates/header');
 

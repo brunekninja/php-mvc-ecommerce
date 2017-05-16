@@ -2,8 +2,6 @@
 
 class Controller
 {
-  protected $cart;
-  protected $home;
   protected $session;
 
   /**

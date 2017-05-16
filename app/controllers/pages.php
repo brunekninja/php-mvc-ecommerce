@@ -34,14 +34,19 @@ class Pages extends Controller
   {
     $this->session->start();
 
-    $model = $this->model('cart');
+    $cart_products = [0];
+
+    $model = $this->model('model');
     $model->name = $name;
 
-    var_dump($model);
+    $session = $this->session->get();
+
+    if (isset($session['cart_products']) && !empty($session['cart_products']))
+      $cart_products = $session['cart_products'];
 
     $dataArr = [
       'model' => $model->name,
-      'products' => $model->getProductByID(2)
+      'products' => $model->getProductByID($cart_products)
     ];
 
     //include header

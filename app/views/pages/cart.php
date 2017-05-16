@@ -26,6 +26,6 @@
           </div>
         </div>
 
-      <?php endforeach; var_dump($_SESSION);?>
+      <?php endforeach; ?>
     </div>
 </section>
