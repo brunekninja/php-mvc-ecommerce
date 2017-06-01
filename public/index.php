@@ -10,7 +10,7 @@
   define ( "SITE_URL", "" ); // root url of website, leave empty for relative urls
 
   if ($_SERVER["SERVER_ADDR"] == '127.0.0.1') {
-    define ( "RESOURCES_PATH", SITE_URL . "/tmp" ); // path where resources are located
+    define ( "RESOURCES_PATH", SITE_URL . "/temp" ); // path where resources are located
   } else {
     define ( "RESOURCES_PATH", SITE_URL . "/dist" ); // path where resources are located
   }

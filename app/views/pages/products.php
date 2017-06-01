@@ -45,7 +45,7 @@ $xml->load('./ex_data/products.xml');
 
 if (!$xml->schemaValidate('./ex_data/schemas/products.xsd')) {
   echo 'Errors';
-  libxml_display_errors();
+//  libxml_display_errors();
 }
 else {
   $xsl = new DOMDocument();
@@ -54,7 +54,13 @@ else {
   $transform = new XSLTProcessor();
   $transform->importStylesheet($xsl);
 
+  $startTime = microtime(true);
+
   echo $transform->transformToXml($xml);
+
+  $endTime = microtime(true);
+  $elapsed = $endTime - $startTime;
+  echo "Execution time : $elapsed seconds";
 }
 
 

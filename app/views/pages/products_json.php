@@ -18,6 +18,8 @@ $json = file_get_contents('./ex_data/products.json');
 
 $json_arr = json_decode($json, true);
 
+$startTime = microtime(true);
+
 foreach ($json_arr as $data) : ?>
 
       <tr>
@@ -32,7 +34,15 @@ foreach ($json_arr as $data) : ?>
       </tr>
 
 
-<?php endforeach; ?>
+<?php
+
+endforeach;
+
+$endTime = microtime(true);
+$elapsed = $endTime - $startTime;
+echo "Execution time : $elapsed seconds";
+
+?>
 
 
 </table>
